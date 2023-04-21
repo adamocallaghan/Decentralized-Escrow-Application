@@ -1,6 +1,8 @@
 export default function Escrow({
   address,
   arbiter,
+  multisig1,
+  multisig2,
   beneficiary,
   value,
   handleApprove,
@@ -11,6 +13,14 @@ export default function Escrow({
         <li>
           <div> Arbiter </div>
           <div> {arbiter} </div>
+        </li>
+        <li>
+          <div> Multisig1 </div>
+          <div> {multisig1} </div>
+        </li>
+        <li>
+          <div> Multisig2 </div>
+          <div> {multisig2} </div>
         </li>
         <li>
           <div> Beneficiary </div>

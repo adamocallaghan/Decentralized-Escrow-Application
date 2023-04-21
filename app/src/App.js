@@ -29,22 +29,25 @@ function App() {
   async function newContract() {
     const beneficiary = document.getElementById('beneficiary').value;
     const arbiter = document.getElementById('arbiter').value;
+    const multisig1 = document.getElementById('multisig1').value;
+    const multisig2 = document.getElementById('multisig2').value;
     const value = ethers.BigNumber.from(document.getElementById('wei').value);
     const escrowContract = await deploy(signer, arbiter, beneficiary, value);
-
 
     const escrow = {
       address: escrowContract.address,
       arbiter,
+      multisig1,
+      multisig2,
       beneficiary,
       value: value.toString(),
       handleApprove: async () => {
-        escrowContract.on('Approved', () => {
-          document.getElementById(escrowContract.address).className =
-            'complete';
-          document.getElementById(escrowContract.address).innerText =
-            "✓ It's been approved!";
-        });
+        // escrowContract.on('Approved', () => {
+        //   document.getElementById(escrowContract.address).className =
+        //     'complete';
+        //   document.getElementById(escrowContract.address).innerText =
+        //     "✓ It's been approved!";
+        // });
 
         await approve(escrowContract, signer);
       },
@@ -60,6 +63,16 @@ function App() {
         <label>
           Arbiter Address
           <input type="text" id="arbiter" />
+        </label>
+
+        <label>
+          Multisig1 Address
+          <input type="text" id="multisig1" />
+        </label>
+
+        <label>
+          Multisig2 Address
+          <input type="text" id="multisig2" />
         </label>
 
         <label>

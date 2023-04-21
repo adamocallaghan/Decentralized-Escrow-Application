@@ -6,13 +6,15 @@ export default async function addContract(
   id,
   contract,
   arbiter,
+  multisig1,
+  multisig2,
   beneficiary,
   value
 ) {
   const buttonId = `approve-${id}`;
 
   const container = document.getElementById('container');
-  container.innerHTML += createHTML(buttonId, arbiter, beneficiary, value);
+  container.innerHTML += createHTML(buttonId, arbiter, multisig1, multisig2, beneficiary, value);
 
   contract.on('Approved', () => {
     document.getElementById(buttonId).className = 'complete';
@@ -25,13 +27,21 @@ export default async function addContract(
   });
 }
 
-function createHTML(buttonId, arbiter, beneficiary, value) {
+function createHTML(buttonId, arbiter, multisig1, multisig2, beneficiary, value) {
   return `
     <div class="existing-contract">
       <ul className="fields">
         <li>
           <div> Arbiter </div>
           <div> ${arbiter} </div>
+        </li>
+        <li>
+          <div> Multisig1 </div>
+          <div> ${multisig1} </div>
+        </li>
+        <li>
+          <div> Multisig2 </div>
+          <div> ${multisig2} </div>
         </li>
         <li>
           <div> Beneficiary </div>
